@@ -8,9 +8,11 @@ export default function Cart() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
+        method:"GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        credentials: "include",
       });
 
       const data = await response.json();
