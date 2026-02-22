@@ -7,7 +7,7 @@ export default function Cart() {
     const fetchCart = async () => {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:5000/api/cart", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
