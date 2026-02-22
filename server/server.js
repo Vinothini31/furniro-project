@@ -11,8 +11,25 @@ connectDB();
 
 const app = express();
 
-// 🧩 Middleware
-app.use(cors());
+// 🧩 CORS Configuration (Local + Production)
+const allowedOrigins = [
+  "http://localhost:5173", // Local frontend (Vite)
+  "https://your-frontend-name.onrender.com", // 👉 Replace with your real frontend URL
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 // 🔑 Auth Routes
@@ -21,13 +38,12 @@ app.use("/api/auth", authRoutes);
 
 const cartRoutes = require("./routes/cartRoutes");
 app.use("/api", cartRoutes);
-
 app.use("/api/cart", cartRoutes);
 
 const productRoutes = require("./routes/productRoutes");
 app.use("/api", productRoutes);
 
-// 🆕 Contact Routes (ADDED)
+// 🆕 Contact Routes
 const contactRoutes = require("./routes/contactRoutes");
 app.use("/api", contactRoutes);
 
