@@ -29,12 +29,13 @@ const Home = () => {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/api/cart", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token.trim()}`, // ✅ trim added
       },
+      credentials: "include",
       body: JSON.stringify({
         productId: product.id,
         name: product.name,
