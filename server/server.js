@@ -11,22 +11,26 @@ connectDB();
 
 const app = express();
 
-// 🧩 CORS Configuration (Local + Production)
+// 🧩 Production-Ready CORS Configuration (Local + Production)
 const allowedOrigins = [
   "http://localhost:5173", // Local frontend (Vite)
-  "https://furniro-frontend-cgcm.onrender.com", // 👉 Replace with your real frontend URL
+  "https://furniro-frontend-cgcm.onrender.com", // Production frontend
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // allow requests with no origin (Postman, server-to-server)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
+        console.log("Blocked CORS request from:", origin);
         callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true,
+    credentials: true, // allow cookies/auth headers
   })
 );
 
