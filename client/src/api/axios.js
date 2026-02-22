@@ -4,9 +4,11 @@ const API = axios.create({
   baseURL:
     import.meta.env.VITE_API_URL ||
     "https://furniro-backend-62st.onrender.com/api",
+    
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 export default API;

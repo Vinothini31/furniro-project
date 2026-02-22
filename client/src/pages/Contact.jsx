@@ -28,9 +28,10 @@ const handleSubmit = async (e) => {
       credentials:"include",
       body: JSON.stringify(formData),
     });
-
+    console.log("Contact fetch response:", response); 
     const data = await response.json();
-
+    console.log("Contact data:", data);
+    
     if (data.success) {
       alert("Message sent successfully ✅");
 
