@@ -14,7 +14,7 @@ const app = express();
 // 🧩 CORS Configuration (Local + Production)
 const allowedOrigins = [
   "http://localhost:5173", // Local frontend (Vite)
-  "https://your-frontend-name.onrender.com", // 👉 Replace with your real frontend URL
+  "https://furniro-frontend-cgcm.onrender.com", // 👉 Replace with your real frontend URL
 ];
 
 app.use(
